@@ -1,0 +1,78 @@
+<?php include 'top.html'; ?>
+
+<div class="main-body container-fluid text-center">
+    <div class='container-fluid'>
+        <h4 class="section-header">Assessments</h4>
+        <input type="text" id="search" placeholder="Search..." class='search pull-right'>
+    </div>
+
+    <div class='assessment-container text-center'>
+        <?php foreach($assessments as $assessment) {
+                    $percent_complete = $assessment->getPercentComplete();
+                    $percent_complete_text = $percent_complete ."%&nbsp;Complete";
+
+                    $retakeRestart = 'Restart';
+                    $onClick = 'takeAssessment('. $assessment->getId() .', '. $assessment->getOnPage() .')';
+                    if($percent_complete == 100) {
+                        $retakeRestart = 'Retake';
+                        $onClick = 'reviewAssessment('. $assessment->getId() .')';
+                    }
+                    if($assessment->getSubmitted()) {
+                        $percent_complete = 100;
+                        $percent_complete_text = 'Submitted';
+                    }
+                ?>
+                <div class="panel panel-default assessment scheme_color1">
+                    <div class="panel-heading assessment-header" title='<?= $assessment->getName(); ?>'><strong><?= $assessment->getName(); ?></strong></div>
+                    <div class="panel-body assessment-description" title='<?= $assessment->getDescription(); ?>'><?= $assessment->getDescription(); ?>
+
+                    </div>
+                    <div class="assessment-footer">
+                        <?php if($assessment->taken()) { ?>
+                            <div class='text-left'>
+                                <a href='<?= $router->pathFor('assessment', ['assessment_id'=>$assessment->getId(), 'page'=>$assessment->getOnPage()], ['reset'=>1]) ?>'><?= $retakeRestart ?></a>
+                                <?php if($assessment->getSubmitted()) { ?>
+                                    <a class='pull-right' href='<?= $router->pathFor('review', ['assessment_id'=>$assessment->getId()]) ?>'>Review</a>
+                                    <?php } else { ?>
+                                    <a class='pull-right' href='<?= $router->pathFor('assessment', ['assessment_id'=>$assessment->getId(), 'page'=>$assessment->getOnPage()]) ?>'>Continue</a>
+                                    <?php } ?>
+                            </div>
+                            <div class="progress assessment-progress">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<?= $percent_complete ?>"
+                                    aria-valuemin="0" aria-valuemax="100" style="width:<?= $percent_complete ?>%">
+                                    &nbsp;<?= $percent_complete_text ?>
+                                </div>
+                            </div>
+                            <?php }
+                            else { ?>
+                            <div class='text-right'>
+                                <a class='btn btn-default' href='<?= $router->pathFor('assessment', ['assessment_id'=>$assessment->getId(), 'page'=>1]) ?>'><span class="glyphicon glyphicon-play"></span> Start</a>
+                            </div>
+                            <?php } ?>
+                    </div>
+
+                </div>
+                <?php } ?>
+    </div>
+</div>
+<script>
+    function takeAssessment(id, page) {
+        window.location.href = 'assessment/'+ id +'/'+ page;
+    }
+
+    function reviewAssessment(id) {
+        window.location.href = 'review/'+ id;
+    }
+
+    $(document).ready(function(){
+        $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $(".assessment").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+    </script>
+
+<?php include 'bottom.html'; ?>

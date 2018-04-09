@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Paul's Hiring Project</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <link href="/css/defaults.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+
+        <div class="container-fluid vertical-center scheme_color1">
+            <div class="jumbotron login-container">
+                <h2>Login</h2>
+                <?php if($error_message) { print "<div class='alert alert-danger'>$error_message</div>"; } ?>
+                <form method="post">
+                    <div class="form-group">
+                        <input type='text' id='username' name='username' placeholder='User Name' value='<?= $username ?>' autofocus>
+                    </div>
+                    <div class="form-group">
+                        <input type='password' id='password' name='password' placeholder='Password'>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg">Login</button>
+                </form>
+            </div>
+        </div>
+
+        <script>
+
+            $(document).ready(function(){
+                $("#username").focus();
+            });
+        </script>
+
+    </body>
+</html>

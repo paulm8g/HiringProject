@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Paul's Hiring Project</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="/css/defaults.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<nav id='nav' class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="<?= $router->pathFor('home') ?>"><span class="glyphicon glyphicon-home"></span> Paul's Hiring Project</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="<?= $router->pathFor('logout') ?>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+    </div>
+        </nav>
+        <button type="button" class="hamburger btn btn-default btn-sm pull-right" onclick="toggleNav();"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+

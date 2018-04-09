@@ -1,0 +1,81 @@
+<?php include 'top.html'; ?>
+
+<?php
+    $percent = ($current_page / $num_interest_areas) * 100;
+?>
+<div class="main-body container">
+    <div class="progress progress-current-position">
+        <div class="progress-bar" role="progressbar" aria-valuenow="<?= $percent ?>"
+            aria-valuemin="0" aria-valuemax="100" style="width:<?= $percent ?>%">
+            <span><?= $current_page ?> / <?= $num_interest_areas ?></span>
+        </div>
+    </div>
+
+
+    <div class='container scheme_color1'><h4 class="section-header"><?= $interestArea->getName(); ?></h4></div>
+    <br>
+
+    <form method="post">
+        <div class='container text-left banded'>
+            <?php foreach($interestArea->getQuestions() as $question) { ?>
+                <div class='row'>
+                    <div class='col-sm-4'><?= $question->getText() ?></div>
+                    <div class='col-sm-7'><div class='row'>
+                            <?php foreach($question->getAnswers() as $answer) {
+                                    $id = 'A'. $answer->getId();
+                                    $name = 'Q'. $question->getId();
+                                    $checked = '';
+                                    if($answer->getSelected()) { $checked = 'checked'; }
+                                ?>
+                                <div class='col-sm-3'>
+                                    <label for='<?= $id ?>'>
+                                        <input id='<?= $id ?>' name='<?= $name ?>' type='radio' value='<?= $answer->getId() ?>' <?= $checked ?>> <?= $answer->getText() ?>
+                                    </label>
+                                </div>
+                                <?php } ?>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
+        </div>
+        <div class='container'>
+            <ul class='pager'>
+                <input type='hidden' id='back' name='back' value='0'>
+                <?php if($current_page > 1) { ?><li class='previous'><a onclick='$("#back").val(1); $("form").submit();'>Previous</a></li> <?php } ?>
+                <?php if($current_page < $num_interest_areas) { ?><li class='next'><a onclick='$("form").submit();'>Next</a></li> <?php }
+                    else { ?><li class='next'><a onclick=' $("form").submit();'>Submit</a></li> <?php } ?>
+                <!-- li class='next'><input type='submit' class='btn btn-default' value='Next'></li -->
+            </ul>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    function toggleNav() {
+        if($('#nav').css('display') == 'none') {
+            $('#nav').css('display', 'block');
+        }
+        else {
+            // remove style so css classes are used
+            $('#nav').css('display', '');
+        }
+    }
+
+    function takeAssessment(id) {
+        window.location.href = 'assessment/'+ id +'/1';
+    }
+
+    $(document).ready(function(){
+        $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $(".assessment").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+            </script>
+
+    </body>
+</html>

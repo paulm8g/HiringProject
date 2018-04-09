@@ -1,0 +1,147 @@
+
+.row {
+    margin: 0;
+}
+
+.main-body {
+    margin-top: 50px;
+}
+
+.scheme_color1 {
+    background-color: rgba(5, 169, 228, 0.53);
+}
+
+.hamburger {
+    display: none;
+}
+
+.section-header {
+    display: inline-block;
+}
+
+.search {
+    position: absolute;
+    margin-top: 10px;
+    right: 10px;
+}
+
+.vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+}
+
+.login-container {
+    margin: auto;
+    text-align: center;
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.assessment-container {
+    margin: auto;
+    /*text-align: left;*/
+    display: inline-block;
+}
+
+.assessment {
+    display: inline-block;
+    width: 250px;
+    height: 250px;
+    margin: 8px;
+    border-radius: 6px;
+    position: relative;
+}
+
+.assessment-header {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.assessment-description {
+    height: 145px;
+    text-align: left;
+    overflow: hidden;
+    word-wrap: break-word;
+    white-space: normal;
+    position: absolute;
+}
+
+.assessment-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 15px;
+}
+
+.assessment-progress {
+    margin: 0;
+}
+
+.assessment-progress > .progress-bar {
+    color: black;
+}
+
+.progress-current-position {
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    margin-right: 0px;
+
+}
+
+.hidden {
+    display: none;
+}
+
+.banded > :nth-child(even) {
+    background-color: lightgrey;
+}
+
+.edit {
+    margin: 2px;
+}
+
+@media (max-width: 767px) {
+    .navbar {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+        margin-right: 20px;
+        margin-top: 4px;
+        z-index: 10000;
+        position: relative;
+    }
+
+    .main-body {
+        margin-top: 0px;
+    }
+
+    .section-header {
+        float: left;
+    }
+
+    .search {
+        margin-top: 7px;
+        margin-right: 4px;
+        position: unset;
+        padding: 0;
+    }
+}
+
+@media (max-width: 585px) {
+    .assessment-container {
+        width: 100%;
+    }
+
+    .assessment {
+        display: block;
+        width: unset;
+    }
+}

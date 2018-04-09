@@ -1,0 +1,37 @@
+<?php include 'top.html'; ?>
+
+<div class="main-body container">
+    <?php
+        $i = 0;
+        foreach($assessment->getInterestAreas() as $interestArea) {
+            $i++;
+        ?>
+        <div class='container scheme_color1'>
+            <h4 class="section-header"><?= $interestArea->getName(); ?>
+            </h4>
+            <a href='<?= $router->pathFor('assessment', ['assessment_id'=>$assessment->getId(), 'page'=>$i]) ?>' class="btn btn-default pull-right edit" role="button"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+        </div>
+        <br>
+        <div class='container text-left banded'>
+            <?php foreach($interestArea->getQuestions() as $question) { ?>
+                <div class='question-row row'>
+                    <div class='question col-sm-4'><?= $question->getText() ?></div>
+                    <div class='answers col-sm-7'><div class='row'>
+                            <div class='col-sm-3'><strong>
+                                    <?php
+                                        $answer = $question->getSelectedAnswer();
+                                        if($answer) {
+                                            print $answer->getText();
+                                        }
+                                    ?>
+                                </strong></div>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
+            <br>
+        </div>
+        <?php } ?>
+</div>
+
+<?php include 'bottom.html'; ?>
