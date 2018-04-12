@@ -44,7 +44,7 @@
     });
 
     $app->get('/', function ($request, $response, $next) {
-        $path = $this->get('router')->pathFor('home');
+        $path = $this->get('router')->pathFor('login');
         return $response->withStatus(302)->withHeader('Location', $path);
     });
 
